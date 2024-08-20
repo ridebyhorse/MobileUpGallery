@@ -9,19 +9,33 @@
 /* Begin PBXBuildFile section */
 		CB2E8D132C73BFDF00D400BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2E8D122C73BFDF00D400BE /* AppDelegate.swift */; };
 		CB2E8D152C73BFDF00D400BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2E8D142C73BFDF00D400BE /* SceneDelegate.swift */; };
-		CB2E8D172C73BFDF00D400BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2E8D162C73BFDF00D400BE /* ViewController.swift */; };
+		CB2E8D172C73BFDF00D400BE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2E8D162C73BFDF00D400BE /* LoginController.swift */; };
 		CB2E8D1C2C73BFE100D400BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB2E8D1B2C73BFE100D400BE /* Assets.xcassets */; };
 		CB2E8D1F2C73BFE100D400BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB2E8D1D2C73BFE100D400BE /* LaunchScreen.storyboard */; };
+		CBBA4EED2C74A1C600718FFD /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EEC2C74A1C600718FFD /* Router.swift */; };
+		CBBA4EEF2C74A1E800718FFD /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EEE2C74A1E800718FFD /* Builder.swift */; };
+		CBBA4EF12C74A20500718FFD /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EF02C74A20500718FFD /* AuthenticationManager.swift */; };
+		CBBA4EF72C74A35700718FFD /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EF62C74A35700718FFD /* LoginPresenter.swift */; };
+		CBBA4EFF2C74A8F400718FFD /* GalleryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EFE2C74A8F400718FFD /* GalleryPresenter.swift */; };
+		CBCFBDA12C7477F900329913 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCFBDA02C7477F900329913 /* GalleryController.swift */; };
+		CBDDAFCC2C73D0820043A97E /* VKID in Frameworks */ = {isa = PBXBuildFile; productRef = CBDDAFCB2C73D0820043A97E /* VKID */; };
+		CBDDAFCE2C73D0820043A97E /* VKIDCore in Frameworks */ = {isa = PBXBuildFile; productRef = CBDDAFCD2C73D0820043A97E /* VKIDCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB2E8D0F2C73BFDF00D400BE /* MobileUpGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileUpGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB2E8D122C73BFDF00D400BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB2E8D142C73BFDF00D400BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CB2E8D162C73BFDF00D400BE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CB2E8D162C73BFDF00D400BE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		CB2E8D1B2C73BFE100D400BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB2E8D1E2C73BFE100D400BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB2E8D202C73BFE100D400BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBBA4EEC2C74A1C600718FFD /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		CBBA4EEE2C74A1E800718FFD /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
+		CBBA4EF02C74A20500718FFD /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		CBBA4EF62C74A35700718FFD /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		CBBA4EFE2C74A8F400718FFD /* GalleryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryPresenter.swift; sourceTree = "<group>"; };
+		CBCFBDA02C7477F900329913 /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDDAFCC2C73D0820043A97E /* VKID in Frameworks */,
+				CBDDAFCE2C73D0820043A97E /* VKIDCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +72,98 @@
 			children = (
 				CB2E8D122C73BFDF00D400BE /* AppDelegate.swift */,
 				CB2E8D142C73BFDF00D400BE /* SceneDelegate.swift */,
-				CB2E8D162C73BFDF00D400BE /* ViewController.swift */,
+				CBBA4EF22C74A30800718FFD /* Login */,
+				CBBA4EF82C74A89200718FFD /* Gallery */,
+				CBBA4EFC2C74A8C200718FFD /* Base */,
+				CBBA4EFB2C74A8B300718FFD /* Services */,
 				CB2E8D1B2C73BFE100D400BE /* Assets.xcassets */,
 				CB2E8D1D2C73BFE100D400BE /* LaunchScreen.storyboard */,
 				CB2E8D202C73BFE100D400BE /* Info.plist */,
 			);
 			path = MobileUpGallery;
+			sourceTree = "<group>";
+		};
+		CBBA4EF22C74A30800718FFD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA4EF32C74A31200718FFD /* Model */,
+				CBBA4EF42C74A31B00718FFD /* View */,
+				CBBA4EF52C74A33800718FFD /* Presenter */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CBBA4EF32C74A31200718FFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CBBA4EF42C74A31B00718FFD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CB2E8D162C73BFDF00D400BE /* LoginController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CBBA4EF52C74A33800718FFD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA4EF62C74A35700718FFD /* LoginPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		CBBA4EF82C74A89200718FFD /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA4EF92C74A8A200718FFD /* Model */,
+				CBBA4EFA2C74A8AA00718FFD /* View */,
+				CBBA4EFD2C74A8D900718FFD /* Presenter */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		CBBA4EF92C74A8A200718FFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CBBA4EFA2C74A8AA00718FFD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CBCFBDA02C7477F900329913 /* GalleryController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CBBA4EFB2C74A8B300718FFD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA4EF02C74A20500718FFD /* AuthenticationManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CBBA4EFC2C74A8C200718FFD /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA4EEC2C74A1C600718FFD /* Router.swift */,
+				CBBA4EEE2C74A1E800718FFD /* Builder.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		CBBA4EFD2C74A8D900718FFD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CBBA4EFE2C74A8F400718FFD /* GalleryPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +182,10 @@
 			dependencies = (
 			);
 			name = MobileUpGallery;
+			packageProductDependencies = (
+				CBDDAFCB2C73D0820043A97E /* VKID */,
+				CBDDAFCD2C73D0820043A97E /* VKIDCore */,
+			);
 			productName = MobileUpGallery;
 			productReference = CB2E8D0F2C73BFDF00D400BE /* MobileUpGallery.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +214,9 @@
 				Base,
 			);
 			mainGroup = CB2E8D062C73BFDF00D400BE;
+			packageReferences = (
+				CBDDAFCA2C73D0810043A97E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */,
+			);
 			productRefGroup = CB2E8D102C73BFDF00D400BE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,9 +243,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB2E8D172C73BFDF00D400BE /* ViewController.swift in Sources */,
+				CBBA4EF72C74A35700718FFD /* LoginPresenter.swift in Sources */,
+				CBCFBDA12C7477F900329913 /* GalleryController.swift in Sources */,
+				CB2E8D172C73BFDF00D400BE /* LoginController.swift in Sources */,
+				CBBA4EF12C74A20500718FFD /* AuthenticationManager.swift in Sources */,
+				CBBA4EED2C74A1C600718FFD /* Router.swift in Sources */,
 				CB2E8D132C73BFDF00D400BE /* AppDelegate.swift in Sources */,
 				CB2E8D152C73BFDF00D400BE /* SceneDelegate.swift in Sources */,
+				CBBA4EFF2C74A8F400718FFD /* GalleryPresenter.swift in Sources */,
+				CBBA4EEF2C74A1E800718FFD /* Builder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +472,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBDDAFCA2C73D0810043A97E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/VKCOM/vkid-ios-sdk/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBDDAFCB2C73D0820043A97E /* VKID */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBDDAFCA2C73D0810043A97E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */;
+			productName = VKID;
+		};
+		CBDDAFCD2C73D0820043A97E /* VKIDCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBDDAFCA2C73D0810043A97E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */;
+			productName = VKIDCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB2E8D072C73BFDF00D400BE /* Project object */;
 }
