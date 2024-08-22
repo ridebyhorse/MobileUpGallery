@@ -20,15 +20,11 @@ final class LoginPresenter {
         view?.setupAuth(vkid: AuthenticationManager.shared.vkid, onAuth: AuthenticationManager.shared.auth)
         setNotification()
     }
-    
-    func authComplete() {
-        
-    }
-    
+ 
     @objc private func handleCurrentUser(_ notification: Notification) {
         guard let isLoggedIn = notification.userInfo?["isLoggedIn"] as? Bool else { return }
         if isLoggedIn {
-            router?.showGallery()
+            router?.startGallery()
         }
     }
 }

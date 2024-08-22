@@ -21,28 +21,38 @@ final class RootRouter {
     }
 
     func start() {
-//        if let currentSession = AuthenticationManager.shared.currentSession {
-//            startGallery()
-//        } else {
+        if AuthenticationManager.shared.isLoggedIn {
+            startGallery()
+        } else {
             startLogin()
-//        }
+        }
     }
 
     func startLogin() {
-        let login = builder.buildLogin()
-        login.presenter.router = self
-        window.rootViewController = login
-        window.makeKeyAndVisible()
+        if let navigation = window.rootViewController as? UINavigationController {
+            navigation.popToRootViewController(animated: true)
+        } else {
+            let login = builder.buildLogin()
+            login.presenter.router = self
+            window.rootViewController = UINavigationController(rootViewController: builder.buildLogin())
+            window.makeKeyAndVisible()
+        }
     }
 
     func startGallery() {
-        let gallery = builder.buildGallery()
-        window.rootViewController = gallery
-        window.makeKeyAndVisible()
-    }
-    
-    func showGallery() {
-        let gallery = builder.buildGallery()
-        window.rootViewController?.present(gallery, animated: true)
+        if let navigation = window.rootViewController as? UINavigationController {
+            let gallery = builder.buildGallery()
+            gallery.presenter.router = self
+            navigation.pushViewController(gallery, animated: true)
+        } else {
+            let login = builder.buildLogin()
+            login.presenter.router = self
+            let gallery = builder.buildGallery()
+            gallery.presenter.router = self
+            let navigation = UINavigationController(rootViewController: login)
+            navigation.pushViewController(gallery, animated: false)
+            window.rootViewController = navigation
+            window.makeKeyAndVisible()
+        }
     }
 }
