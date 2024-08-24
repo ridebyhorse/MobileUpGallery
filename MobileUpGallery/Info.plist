@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Addit</key>
+	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Доступ для сохранения фото</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -19,22 +23,22 @@
 			</array>
 		</dict>
 	</dict>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>vkauthorize-silent</string>
-    </array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLName</key>
-            <string>auth_callback</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>vk52171977</string>
-            </array>
-        </dict>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>vkauthorize-silent</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>auth_callback</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>vk52171977</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
