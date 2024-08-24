@@ -10,16 +10,16 @@ import UIKit
 final class RootRouter {
     private let window: UIWindow
     private let builder: Builder
-
+    
     init(_ window: UIWindow, builder: Builder) {
         self.window = window
         self.builder = builder
     }
-
+    
     deinit {
         print("root died")
     }
-
+    
     func start() {
         if AuthenticationManager.shared.isLoggedIn {
             startGallery()
@@ -27,18 +27,18 @@ final class RootRouter {
             startLogin()
         }
     }
-
+    
     func startLogin() {
         if let navigation = window.rootViewController as? UINavigationController {
             navigation.popToRootViewController(animated: true)
         } else {
             let login = builder.buildLogin()
             login.presenter.router = self
-            window.rootViewController = UINavigationController(rootViewController: builder.buildLogin())
+            window.rootViewController = UINavigationController(rootViewController: login)
             window.makeKeyAndVisible()
         }
     }
-
+    
     func startGallery() {
         if let navigation = window.rootViewController as? UINavigationController {
             let gallery = builder.buildGallery()
@@ -54,5 +54,10 @@ final class RootRouter {
             window.rootViewController = navigation
             window.makeKeyAndVisible()
         }
+    }
+    
+    func push(_ vc: UIViewController) {
+        guard let navigation = window.rootViewController as? UINavigationController else { return }
+        navigation.pushViewController(vc, animated: true)
     }
 }

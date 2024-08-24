@@ -10,34 +10,20 @@ import VKID
 
 final class GalleryController: UIViewController {
     let presenter: GalleryPresenter
+    private var photos = [Photo]()
+    private var videos = [Video]()
     
-    private let nameLabel: UILabel = {
-        let nameLabel = UILabel()
-        nameLabel.font = .systemFont(ofSize: 20, weight: .medium)
-        nameLabel.textColor = .label
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        return nameLabel
-    }()
-    
-    private let idLabel: UILabel = {
-        let idLabel = UILabel()
-        idLabel.font = .systemFont(ofSize: 10, weight: .regular)
-        idLabel.textColor = .label
-        idLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        return idLabel
-    }()
-    
-    private let control: UISegmentedControl = {
+    private lazy var control: UISegmentedControl = {
         let control = UISegmentedControl()
         control.insertSegment(withTitle: "Фото", at: 0, animated: true)
         control.insertSegment(withTitle: "Видео", at: 1, animated: true)
         control.addTarget(self, action: #selector(tabSwitched), for: .valueChanged)
-        control.translatesAutoresizingMaskIntoConstraints = false
         
         return control
     }()
+    
+    private let photoView = PhotoView()
+    private let videoView = VideoView()
     
     init(presenter: GalleryPresenter) {
         self.presenter = presenter
@@ -53,35 +39,48 @@ final class GalleryController: UIViewController {
         presenter.activate()
         title = "Mobile Up Gallery"
         configure()
+        setDelegates()
     }
     
+    private func setDelegates() {
+        photoView.photoCollection.dataSource = self
+        photoView.photoCollection.delegate = self
+        videoView.videoCollection.dataSource = self
+        videoView.videoCollection.delegate = self
+    }
+
     private func configure() {
         view.backgroundColor = .systemBackground
         setupNavigationItem()
         control.selectedSegmentIndex = 0
-        
-        let stack = UIStackView(arrangedSubviews: [nameLabel, idLabel])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 18
-        
+
         view.addSubview(control)
-        view.addSubview(stack)
-        
+        view.addSubview(photoView)
+        view.addSubview(videoView)
+        view.subviews.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
         NSLayoutConstraint.activate([
             control.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             control.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             control.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             control.heightAnchor.constraint(equalToConstant: 32),
-            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stack.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            photoView.topAnchor.constraint(equalTo: control.bottomAnchor, constant: 8),
+            photoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            photoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            photoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            videoView.topAnchor.constraint(equalTo: control.bottomAnchor, constant: 8),
+            videoView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            videoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            videoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        videoView.isHidden = true
     }
     
     private func setupNavigationItem() {
         navigationItem.hidesBackButton = true
+        navigationItem.backButtonDisplayMode = .minimal
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(signOutTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .label
+        navigationController?.navigationBar.tintColor = .label
     }
     
     @objc private func signOutTapped() {
@@ -89,14 +88,140 @@ final class GalleryController: UIViewController {
     }
     
     @objc private func tabSwitched(_ sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
+        photoView.isHidden.toggle()
+        videoView.isHidden.toggle()
     }
 }
 
 extension GalleryController: GalleryControllerProtocol {
-    func update(with user: User?) {
+    func update(with user: User?, photos: [Photo], videos: [Video]) {
         guard let user else { return }
-        nameLabel.text = (user.firstName ?? "Имя") + " " + (user.lastName ?? "Фамилия")
-        idLabel.text = String(user.id.value)
+        self.photos = photos
+        self.videos = videos
+    }
+}
+
+private extension GalleryController {
+    func getCollectionViewCell(for photoId: Int) -> PhotoCell? {
+        let indexPath = IndexPath(item: photoId, section: 0)
+        guard let cell = photoView.photoCollection.cellForItem(at: indexPath) as? PhotoCell else { return nil }
+        
+        return cell
+    }
+    
+    func getCollectionViewCell(for videoId: Int) -> VideoCell? {
+        let indexPath = IndexPath(item: videoId, section: 0)
+        guard let cell = videoView.videoCollection.cellForItem(at: indexPath) as? VideoCell else { return nil }
+        
+        return cell
+    }
+}
+
+extension GalleryController: PhotoViewProtocol {
+    func didUpdatePhotos() {
+        photoView.photoCollection.reloadData()
+    }
+    
+    func insertPhotos(at indexPaths: [IndexPath]) {
+        photoView.photoCollection.performBatchUpdates({
+            photoView.photoCollection.insertItems(at: indexPaths)
+        }, completion: nil)
+    }
+}
+
+extension GalleryController: VideoViewProtocol {
+    func didUpdateVideos() {
+        videoView.videoCollection.reloadData()
+    }
+    
+    func insertVideos(at indexPaths: [IndexPath]) {
+        videoView.videoCollection.performBatchUpdates({
+            videoView.videoCollection.insertItems(at: indexPaths)
+        }, completion: nil)
+    }
+}
+
+extension GalleryController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView.tag {
+        case 0:
+            return photos.count
+        default:
+            return videos.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        switch collectionView.tag {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "photoCell",
+                for: indexPath) as? PhotoCell else {
+                return UICollectionViewCell()
+            }
+            
+            let photoData = photos[indexPath.row]
+            
+            cell.delegate = self
+            cell.configure(with: photoData, and: indexPath)
+            return cell
+        default:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "videoCell",
+                for: indexPath) as? VideoCell else {
+                return UICollectionViewCell()
+            }
+            
+            let videoData = videos[indexPath.row]
+            cell.delegate = self
+            cell.configure(with: videoData, and: indexPath)
+            return cell
+        }
+    }
+}
+
+extension GalleryController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let id = indexPath.row
+        switch control.selectedSegmentIndex {
+        case 0:
+            presenter.selectPhoto(id)
+        default:
+            presenter.selectVideo(id)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+
+        guard offsetY > 0 else { return }
+
+        if offsetY > contentHeight - height * 1.2 {
+            switch control.selectedSegmentIndex {
+            case 0:
+                presenter.loadPhotos()
+            default:
+                presenter.loadVideos()
+            }
+        }
+    }
+}
+
+extension GalleryController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView.tag {
+        case 0:
+            let interItemSpacing: CGFloat = 4
+            let numberOfItemsPerRow: CGFloat = 2
+            let totalSpacing = (numberOfItemsPerRow - 1) * interItemSpacing
+            let itemSize = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow
+            return CGSize(width: itemSize, height: itemSize)
+        default:
+            let itemSize = collectionView.bounds.width
+            return CGSize(width: itemSize, height: itemSize * 0.56)
+        }
     }
 }

@@ -51,6 +51,7 @@ final class AuthenticationManager {
         //Обработка результата авторизации.
         do {
             let session = try authResult.get()
+            currentSession = vkid?.currentAuthorizedSession
             fetchUser()
             print("Auth succeeded with token: \(session.accessToken)")
         } catch AuthError.cancelled {
