@@ -12,6 +12,10 @@
 		CB2E8D172C73BFDF00D400BE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2E8D162C73BFDF00D400BE /* LoginController.swift */; };
 		CB2E8D1C2C73BFE100D400BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB2E8D1B2C73BFE100D400BE /* Assets.xcassets */; };
 		CB2E8D1F2C73BFE100D400BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB2E8D1D2C73BFE100D400BE /* LaunchScreen.storyboard */; };
+		CB38C8FB2C7786C500004964 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CB38C8FA2C7786C500004964 /* Kingfisher */; };
+		CB38C8FD2C77892400004964 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB38C8FC2C77892400004964 /* NetworkManager.swift */; };
+		CB9686982C77A3C000C99381 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9686972C77A3C000C99381 /* Photo.swift */; };
+		CB96869A2C77C33600C99381 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9686992C77C33600C99381 /* PhotoCell.swift */; };
 		CBBA4EED2C74A1C600718FFD /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EEC2C74A1C600718FFD /* Router.swift */; };
 		CBBA4EEF2C74A1E800718FFD /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EEE2C74A1E800718FFD /* Builder.swift */; };
 		CBBA4EF12C74A20500718FFD /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA4EF02C74A20500718FFD /* AuthenticationManager.swift */; };
@@ -20,6 +24,9 @@
 		CBCFBDA12C7477F900329913 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCFBDA02C7477F900329913 /* GalleryController.swift */; };
 		CBDDAFCC2C73D0820043A97E /* VKID in Frameworks */ = {isa = PBXBuildFile; productRef = CBDDAFCB2C73D0820043A97E /* VKID */; };
 		CBDDAFCE2C73D0820043A97E /* VKIDCore in Frameworks */ = {isa = PBXBuildFile; productRef = CBDDAFCD2C73D0820043A97E /* VKIDCore */; };
+		CBFBC6922C79C55200BFF0C4 /* MockVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFBC6912C79C55100BFF0C4 /* MockVideo.swift */; };
+		CBFBC6942C79DC7B00BFF0C4 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFBC6932C79DC7B00BFF0C4 /* PhotoView.swift */; };
+		CBFBC6962C79E6C300BFF0C4 /* PhotoDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFBC6952C79E6C300BFF0C4 /* PhotoDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,12 +37,17 @@
 		CB2E8D1B2C73BFE100D400BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB2E8D1E2C73BFE100D400BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB2E8D202C73BFE100D400BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB38C8FC2C77892400004964 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CB9686972C77A3C000C99381 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		CB9686992C77C33600C99381 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		CBBA4EEC2C74A1C600718FFD /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CBBA4EEE2C74A1E800718FFD /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		CBBA4EF02C74A20500718FFD /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		CBBA4EF62C74A35700718FFD /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		CBBA4EFE2C74A8F400718FFD /* GalleryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryPresenter.swift; sourceTree = "<group>"; };
 		CBCFBDA02C7477F900329913 /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
+		CBFBC6932C79DC7B00BFF0C4 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		CBFBC6952C79E6C300BFF0C4 /* PhotoDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB38C8FB2C7786C500004964 /* Kingfisher in Frameworks */,
 				CBDDAFCC2C73D0820043A97E /* VKID in Frameworks */,
 				CBDDAFCE2C73D0820043A97E /* VKIDCore in Frameworks */,
 			);
@@ -129,6 +142,7 @@
 		CBBA4EF92C74A8A200718FFD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CB9686972C77A3C000C99381 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				CBCFBDA02C7477F900329913 /* GalleryController.swift */,
+				CB9686992C77C33600C99381 /* PhotoCell.swift */,
+				CBFBC6932C79DC7B00BFF0C4 /* PhotoView.swift */,
+				CBFBC6952C79E6C300BFF0C4 /* PhotoDetailController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -145,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				CBBA4EF02C74A20500718FFD /* AuthenticationManager.swift */,
+				CB38C8FC2C77892400004964 /* NetworkManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -185,6 +203,7 @@
 			packageProductDependencies = (
 				CBDDAFCB2C73D0820043A97E /* VKID */,
 				CBDDAFCD2C73D0820043A97E /* VKIDCore */,
+				CB38C8FA2C7786C500004964 /* Kingfisher */,
 			);
 			productName = MobileUpGallery;
 			productReference = CB2E8D0F2C73BFDF00D400BE /* MobileUpGallery.app */;
@@ -216,6 +235,7 @@
 			mainGroup = CB2E8D062C73BFDF00D400BE;
 			packageReferences = (
 				CBDDAFCA2C73D0810043A97E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */,
+				CB38C8F92C7786C500004964 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = CB2E8D102C73BFDF00D400BE /* Products */;
 			projectDirPath = "";
@@ -245,10 +265,15 @@
 			files = (
 				CBBA4EF72C74A35700718FFD /* LoginPresenter.swift in Sources */,
 				CBCFBDA12C7477F900329913 /* GalleryController.swift in Sources */,
+				CB38C8FD2C77892400004964 /* NetworkManager.swift in Sources */,
 				CB2E8D172C73BFDF00D400BE /* LoginController.swift in Sources */,
+				CB96869A2C77C33600C99381 /* PhotoCell.swift in Sources */,
 				CBBA4EF12C74A20500718FFD /* AuthenticationManager.swift in Sources */,
+				CBFBC6962C79E6C300BFF0C4 /* PhotoDetailController.swift in Sources */,
 				CBBA4EED2C74A1C600718FFD /* Router.swift in Sources */,
 				CB2E8D132C73BFDF00D400BE /* AppDelegate.swift in Sources */,
+				CBFBC6942C79DC7B00BFF0C4 /* PhotoView.swift in Sources */,
+				CB9686982C77A3C000C99381 /* Photo.swift in Sources */,
 				CB2E8D152C73BFDF00D400BE /* SceneDelegate.swift in Sources */,
 				CBBA4EFF2C74A8F400718FFD /* GalleryPresenter.swift in Sources */,
 				CBBA4EEF2C74A1E800718FFD /* Builder.swift in Sources */,
@@ -474,6 +499,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CB38C8F92C7786C500004964 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		CBDDAFCA2C73D0810043A97E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/VKCOM/vkid-ios-sdk/";
@@ -485,6 +518,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CB38C8FA2C7786C500004964 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB38C8F92C7786C500004964 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		CBDDAFCB2C73D0820043A97E /* VKID */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CBDDAFCA2C73D0810043A97E /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */;
