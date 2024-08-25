@@ -16,21 +16,15 @@ final class VideoCell: UICollectionViewCell {
         return photoView
     }()
     
-    private let titleBackground: UIView = {
-        let titleBackground = UIView()
-        titleBackground.backgroundColor = .systemBackground
-        titleBackground.alpha = 0.5
-        titleBackground.layer.cornerRadius = 16
-        
-        return titleBackground
-    }()
-    
-    private let title: UILabel = {
-        let title = UILabel()
+    private let title: PaddingLabel = {
+        let title = PaddingLabel(withInsets: 6, 6, 12, 12)
         title.textColor = .label
+        title.backgroundColor = .systemBackground.withAlphaComponent(0.5)
+        title.layer.cornerRadius = 12
         title.font = .systemFont(ofSize: 13, weight: .medium)
         title.numberOfLines = 2
         title.textAlignment = .right
+        title.clipsToBounds = true
         
         return title
     }()
@@ -56,7 +50,6 @@ final class VideoCell: UICollectionViewCell {
     
     private func setupUI() {
         contentView.addSubview(previewView)
-        contentView.addSubview(titleBackground)
         contentView.addSubview(title)
         contentView.subviews.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
         
@@ -65,13 +58,9 @@ final class VideoCell: UICollectionViewCell {
             previewView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             previewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             previewView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            title.bottomAnchor.constraint(equalTo: previewView.bottomAnchor, constant: -28),
-            title.trailingAnchor.constraint(equalTo: previewView.trailingAnchor, constant: -20),
-            title.leadingAnchor.constraint(equalTo: previewView.leadingAnchor, constant: 140),
-            titleBackground.topAnchor.constraint(equalTo: title.topAnchor, constant: -4),
-            titleBackground.bottomAnchor.constraint(equalTo: title.bottomAnchor, constant: 4),
-            titleBackground.leadingAnchor.constraint(equalTo: title.leadingAnchor, constant: -12),
-            titleBackground.trailingAnchor.constraint(equalTo: title.trailingAnchor, constant: 12)
+            title.bottomAnchor.constraint(equalTo: previewView.bottomAnchor, constant: -16),
+            title.trailingAnchor.constraint(equalTo: previewView.trailingAnchor, constant: -16),
+            title.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.6)
         ])
     }
 }

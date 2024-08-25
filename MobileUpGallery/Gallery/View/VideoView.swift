@@ -8,8 +8,7 @@
 import UIKit
 
 protocol VideoViewProtocol: AnyObject {
-    func didUpdateVideos()
-    func insertVideos(at indexPaths: [IndexPath])
+    func updateVideos(videos: [Video])
 }
 
 final class VideoView: UIView {

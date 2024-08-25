@@ -9,7 +9,7 @@ import UIKit
 import VKID
 
 protocol LoginControllerProtocol: UIViewController {
-    func setupAuth(vkid: VKID?, onAuth: ((AuthResult) -> Void)?)
+    func setupAuth(vkid: VKID?, onAuth: ((AuthResult) throws -> Void)?)
 }
 
 final class LoginPresenter {

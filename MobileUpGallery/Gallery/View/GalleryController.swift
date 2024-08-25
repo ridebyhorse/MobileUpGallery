@@ -93,14 +93,6 @@ final class GalleryController: UIViewController {
     }
 }
 
-extension GalleryController: GalleryControllerProtocol {
-    func update(with user: User?, photos: [Photo], videos: [Video]) {
-        guard let user else { return }
-        self.photos = photos
-        self.videos = videos
-    }
-}
-
 private extension GalleryController {
     func getCollectionViewCell(for photoId: Int) -> PhotoCell? {
         let indexPath = IndexPath(item: photoId, section: 0)
@@ -117,27 +109,15 @@ private extension GalleryController {
     }
 }
 
-extension GalleryController: PhotoViewProtocol {
-    func didUpdatePhotos() {
+extension GalleryController: GalleryControllerProtocol, PhotoViewProtocol, VideoViewProtocol {
+    func updatePhotos(photos: [Photo]) {
+        self.photos = photos
         photoView.photoCollection.reloadData()
     }
-    
-    func insertPhotos(at indexPaths: [IndexPath]) {
-        photoView.photoCollection.performBatchUpdates({
-            photoView.photoCollection.insertItems(at: indexPaths)
-        }, completion: nil)
-    }
-}
 
-extension GalleryController: VideoViewProtocol {
-    func didUpdateVideos() {
+    func updateVideos(videos: [Video]) {
+        self.videos = videos
         videoView.videoCollection.reloadData()
-    }
-    
-    func insertVideos(at indexPaths: [IndexPath]) {
-        videoView.videoCollection.performBatchUpdates({
-            videoView.videoCollection.insertItems(at: indexPaths)
-        }, completion: nil)
     }
 }
 
@@ -191,23 +171,6 @@ extension GalleryController: UICollectionViewDelegate {
             presenter.selectVideo(id)
         }
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let height = scrollView.frame.size.height
-
-        guard offsetY > 0 else { return }
-
-        if offsetY > contentHeight - height * 1.2 {
-            switch control.selectedSegmentIndex {
-            case 0:
-                presenter.loadPhotos()
-            default:
-                presenter.loadVideos()
-            }
-        }
-    }
 }
 
 extension GalleryController: UICollectionViewDelegateFlowLayout {
@@ -222,6 +185,28 @@ extension GalleryController: UICollectionViewDelegateFlowLayout {
         default:
             let itemSize = collectionView.bounds.width
             return CGSize(width: itemSize, height: itemSize * 0.56)
+        }
+    }
+}
+
+extension GalleryController: LoadingPresenting {
+    func showLoading() {
+        let loading = LoadingView()
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loading)
+        NSLayoutConstraint.activate([
+            loading.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loading.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loading.topAnchor.constraint(equalTo: view.topAnchor),
+            loading.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    func hideLoading() {
+        for view in view.subviews {
+            if let loading = view as? LoadingView {
+                loading.removeFromSuperview()
+            }
         }
     }
 }

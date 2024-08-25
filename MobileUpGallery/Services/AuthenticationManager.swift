@@ -10,23 +10,22 @@ import VKID
 
 final class AuthenticationManager {
     static let shared = AuthenticationManager()
-    // ID приложения
+
     private let clientId = "52171977"
-    // защищенный ключ (client_secret)
     private let clientSecret = "GacA3WtYrWTmPjkL1QEv"
     
+    var currentSession: UserSession?
+    var vkid: VKID?
+    var isLoggedIn = false
     var currentUser: User? {
         didSet {
             postUserNotification()
         }
     }
-    var currentSession: UserSession?
-    var vkid: VKID?
-    var isLoggedIn = false
     
     private init() {}
     
-    func setup() {
+    func setup() throws {
         do {
             vkid = try VKID(
                 config: Configuration(
@@ -40,24 +39,36 @@ final class AuthenticationManager {
         } catch {
             preconditionFailure("Failed to initialize VKID: \(error)")
         }
-        currentSession = vkid?.currentAuthorizedSession
         
+        currentSession = vkid?.currentAuthorizedSession
         guard let currentSession else { return }
-        updateSessionToken()
-        fetchUser()
+        
+        do {
+            try updateSessionToken()
+            try fetchUser()
+        }
+        catch {
+            throw error
+        }
     }
     
-    func auth(authResult: AuthResult) {
-        //Обработка результата авторизации.
+    func auth(authResult: AuthResult) throws {
         do {
             let session = try authResult.get()
             currentSession = vkid?.currentAuthorizedSession
-            fetchUser()
+            do {
+                try fetchUser()
+            }
+            catch {
+                throw error
+            }
             print("Auth succeeded with token: \(session.accessToken)")
         } catch AuthError.cancelled {
             print("Auth cancelled by user")
+            throw AuthError.cancelled
         } catch {
             print("Auth failed with error: \(error)")
+            throw error
         }
     }
     
@@ -67,7 +78,9 @@ final class AuthenticationManager {
         }
     }
     
-    private func fetchUser() {
+    private func fetchUser() throws {
+        var userFetchingError: Error?
+        
         vkid?.currentAuthorizedSession?.fetchUser { [weak self] result in
             do {
                 let user = try result.get()
@@ -75,19 +88,31 @@ final class AuthenticationManager {
                 print(user.lastName ?? "surname")
                 self?.currentUser = user
             } catch {
+                userFetchingError = error
                 print("Failed to fetch user info")
             }
         }
+        
+        if let userFetchingError {
+            throw userFetchingError
+        }
     }
     
-    private func updateSessionToken() {
+    private func updateSessionToken() throws {
+        var tokenRefreshError: Error?
+        
         vkid?.currentAuthorizedSession?.getFreshAccessToken { [weak self] result in
             do {
                 let (accessToken, refreshToken) = try result.get()
                 self?.isLoggedIn = true
             } catch {
+                tokenRefreshError = error
                 print("Refreshing access token failed")
             }
+        }
+        
+        if let tokenRefreshError {
+            throw tokenRefreshError
         }
     }
 }
