@@ -29,12 +29,16 @@ final class PhotoDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "\(photo.date)"
         setupNavigationItem()
         setupUI()
     }
     
     private func setupNavigationItem() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMMM yyyy"
+        let date = Date(timeIntervalSince1970: TimeInterval(photo.date))
+        
+        title = dateFormatter.string(from: date)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: .init(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))
         navigationController?.navigationBar.tintColor = .label
     }

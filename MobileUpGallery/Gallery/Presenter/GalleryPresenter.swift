@@ -8,12 +8,9 @@
 import Foundation
 import VKID
 
-protocol GalleryControllerProtocol: AnyObject {
-    func update(with user: User?, photos: [Photo], videos: [Video])
-    func didUpdatePhotos()
-    func insertPhotos(at indexPaths: [IndexPath])
-    func didUpdateVideos()
-    func insertVideos(at indexPaths: [IndexPath])
+protocol GalleryControllerProtocol: AnyObject, LoadingPresenting {
+    func updatePhotos(photos: [Photo])
+    func updateVideos(videos: [Video])
 }
 
 final class GalleryPresenter {
@@ -23,10 +20,11 @@ final class GalleryPresenter {
     private var videos = [Video]()
     
     func activate() {
-        setNotification()
+//        setNotification()
+        view?.showLoading()
         
-        getVideos()
-        getPhotos()
+        getMedia()
+//        getVideos()
     }
     
     func signOut() {
@@ -42,22 +40,31 @@ final class GalleryPresenter {
         router?.push(VideoDetailController(video: videos[id]))
     }
     
-    func loadPhotos() {
-        
+    private func getMedia() {
+        Task {
+            await fetchMedia()
+        }
     }
     
-    func loadVideos() {
-        
+    private func fetchMedia() async {
+        await withTaskGroup(of: Void.self) { taskGroup in
+            taskGroup.addTask { [weak self] in
+                do {
+                    self?.photos = try await NetworkManager.shared.fetchPhotos()
+                    await self?.updateView(with: self?.photos ?? [Photo]())
+                }
+                catch {
+                    print(error)
+                }
+            }
+        }
+        getVideos()
     }
     
-    private func getPhotos() {
+    private func getVideos() {
         Task {
             do {
-                photos = try await NetworkManager.shared.fetchPhotos()
-                print(photos)
-                print(videos.count)
-                view?.update(with: AuthenticationManager.shared.currentUser, photos: photos, videos: videos)
-                await updateView(with: photos)
+                videos = try await NetworkManager.shared.fetchVideos()
                 await updateView(with: videos)
             }
             catch {
@@ -65,58 +72,17 @@ final class GalleryPresenter {
             }
         }
     }
-    
-    private func getVideos() {
-        videos = MockVideo.getMockVideo()
-    }
-    
-    @objc private func handleCurrentUser(_ notification: Notification) {
-        guard let isLoggedIn = notification.userInfo?["isLoggedIn"] as? Bool else { return }
-        if isLoggedIn {
-            view?.update(with: AuthenticationManager.shared.currentUser, photos: photos, videos: videos)
-        }
-    }
 }
 
 private extension GalleryPresenter {
-    func setNotification() {
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(handleCurrentUser),
-            name: .init("currentUserDidChanged"),
-            object: nil
-        )
-    }
-    
-    
     @MainActor
     func updateView(with newPhotos: [Photo]) {
-        if photos.count == newPhotos.count {
-            /// if photos load first
-            view?.didUpdatePhotos()
-        } else {
-            /// if photo load after scroll
-            let startIndex = photos.count - newPhotos.count
-            let endIndex = photos.count - 1
-            let indexPaths = (startIndex...endIndex).map {
-                IndexPath(item: $0, section: 0)
-            }
-            view?.insertPhotos(at: indexPaths)
-        }
+        view?.hideLoading()
+        view?.updatePhotos(photos: newPhotos)
     }
     
     @MainActor
     func updateView(with newVideos: [Video]) {
-        if videos.count == newVideos.count {
-            /// if videos load first
-            view?.didUpdateVideos()
-        } else {
-            /// if video load after scroll
-            let startIndex = videos.count - newVideos.count
-            let endIndex = videos.count - 1
-            let indexPaths = (startIndex...endIndex).map {
-                IndexPath(item: $0, section: 0)
-            }
-            view?.insertVideos(at: indexPaths)
-        }
+        view?.updateVideos(videos: newVideos)
     }
 }

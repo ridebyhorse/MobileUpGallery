@@ -8,8 +8,7 @@
 import UIKit
 
 protocol PhotoViewProtocol: AnyObject {
-    func didUpdatePhotos()
-    func insertPhotos(at indexPaths: [IndexPath])
+    func updatePhotos(photos: [Photo])
 }
 
 final class PhotoView: UIView {

@@ -50,7 +50,7 @@ final class LoginController: UIViewController {
 }
 
 extension LoginController: LoginControllerProtocol {
-    func setupAuth(vkid: VKID?, onAuth: ((AuthResult) -> Void)?) {
+    func setupAuth(vkid: VKID?, onAuth: ((AuthResult) throws -> Void)?) {
         oneTap = OneTapButton(
             appearance: .init(
                 style: .primary(),
@@ -62,7 +62,12 @@ extension LoginController: LoginControllerProtocol {
             ),
             presenter: .newUIWindow
         ) { authResult in
-            onAuth?(authResult)
+            do {
+                try onAuth?(authResult)
+            }
+            catch {
+                print(error)
+            }
         }
         guard let vkid, let oneTap else { return }
         let oneTapView = vkid.ui(for: oneTap).uiView()

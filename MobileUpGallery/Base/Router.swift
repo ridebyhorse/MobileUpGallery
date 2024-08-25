@@ -21,6 +21,13 @@ final class RootRouter {
     }
     
     func start() {
+        do {
+            try AuthenticationManager.shared.setup()
+        }
+        catch {
+            print(error)
+        }
+        
         if AuthenticationManager.shared.isLoggedIn {
             startGallery()
         } else {
