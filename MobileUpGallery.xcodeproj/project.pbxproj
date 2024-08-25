@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB15CE982C7B31BA00D02A3E /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB15CE972C7B31BA00D02A3E /* PaddingLabel.swift */; };
 		CB1B57DF2C7A087500CD9B1F /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1B57DE2C7A087500CD9B1F /* VideoCell.swift */; };
 		CB1B57E12C7A08FC00CD9B1F /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1B57E02C7A08FC00CD9B1F /* Video.swift */; };
 		CB1B57E32C7A152C00CD9B1F /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1B57E22C7A152C00CD9B1F /* VideoView.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB15CE972C7B31BA00D02A3E /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		CB1B57DE2C7A087500CD9B1F /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		CB1B57E02C7A08FC00CD9B1F /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		CB1B57E22C7A152C00CD9B1F /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				CBBA4EEC2C74A1C600718FFD /* Router.swift */,
 				CBBA4EEE2C74A1E800718FFD /* Builder.swift */,
+				CB15CE972C7B31BA00D02A3E /* PaddingLabel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				CB2E8D172C73BFDF00D400BE /* LoginController.swift in Sources */,
 				CB1B57E32C7A152C00CD9B1F /* VideoView.swift in Sources */,
 				CB96869A2C77C33600C99381 /* PhotoCell.swift in Sources */,
+				CB15CE982C7B31BA00D02A3E /* PaddingLabel.swift in Sources */,
 				CBBA4EF12C74A20500718FFD /* AuthenticationManager.swift in Sources */,
 				CB1B57E52C7A1BFF00CD9B1F /* VideoDetailController.swift in Sources */,
 				CBFBC6962C79E6C300BFF0C4 /* PhotoDetailController.swift in Sources */,

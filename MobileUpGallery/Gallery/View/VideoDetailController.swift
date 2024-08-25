@@ -33,8 +33,21 @@ final class VideoDetailController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        setupNavigationItem()
         guard let url = URL(string: video.player) else { return }
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
+    }
+    
+    private func setupNavigationItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .init(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareVideo))
+        navigationController?.navigationBar.tintColor = .label
+    }
+    
+    @objc private func shareVideo() {
+        guard let videoLink = URL(string: video.player) else { return }
+        let ac = UIActivityViewController(activityItems: [videoLink], applicationActivities: nil)
+        
+        present(ac, animated: true)
     }
 }
