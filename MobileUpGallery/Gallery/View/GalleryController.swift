@@ -84,7 +84,12 @@ final class GalleryController: UIViewController {
     }
     
     @objc private func signOutTapped() {
-        presenter.signOut()
+        let ac = UIAlertController(title: "Вы хотите выйти из аккаунта?", message: "Вы больше не сможете просматривать галерею MobileUp", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Выйти", style: .destructive) { [weak self] _ in
+            self?.presenter.signOut()
+        })
+        ac.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        present(ac, animated: true)
     }
     
     @objc private func tabSwitched(_ sender: UISegmentedControl) {

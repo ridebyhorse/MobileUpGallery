@@ -26,6 +26,9 @@ final class RootRouter {
         }
         catch {
             print(error)
+            showError(title: "Ощибка сервиса авторизации", message: "Попробуйте снова", actionTitle: "OK") { [weak self] _ in
+                self?.start()
+            }
         }
         
         if AuthenticationManager.shared.isLoggedIn {
@@ -66,5 +69,23 @@ final class RootRouter {
     func push(_ vc: UIViewController) {
         guard let navigation = window.rootViewController as? UINavigationController else { return }
         navigation.pushViewController(vc, animated: true)
+    }
+}
+
+extension RootRouter: ErrorPresenting {
+    func showError(title: String, message: String?, actionTitle: String?, action: ((UIView) -> Void)?) {
+        let errorVC = UIViewController()
+        let errorView = ErrorView()
+        errorView.title = title
+        errorView.message = message
+        errorView.actionTitle = actionTitle
+        errorView.action = action
+        errorVC.view = errorView
+        window.rootViewController = errorVC
+        window.makeKeyAndVisible()
+    }
+    
+    func hideError() {
+        
     }
 }
